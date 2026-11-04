@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FaceMarkup: Jumbo Drill</title>
+<meta name="description" content="Face mark-up, rounds and headings for underground jumbo operators. Works offline.">
+<link rel="icon" href="icon-512.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap">
+<style>
+  :root {
+    --navy: #22364f; --navy-deep: #1a2a3e; --orange: #e8641b; --orange-text: #b3470c;
+    --rock: #e9e8e4; --ink: #1d2329; --muted: #4f5862; --paint: #f5b83d; --on-navy: #c9d2dc;
+    --display: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+    --body: "Barlow", "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--rock); color: var(--ink); font: 400 18px/1.55 var(--body); }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; }
+  a:focus-visible { outline: 3px solid var(--paint); outline-offset: 3px; }
+  p { margin: 0; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+  .phone { border: 7px solid var(--navy-deep); border-radius: 30px; background: var(--navy-deep); }
+
+  /* Hero: the survey grid from the store graphic, with the app cut off by the floor line */
+  .hero { position: relative; overflow: hidden; color: #fff; background-color: var(--navy);
+    background-image: radial-gradient(circle, rgba(255,255,255,.28) 2px, transparent 2.5px), linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px);
+    background-size: 58px 58px; background-position: 29px 29px, 29px 0, 0 29px;
+    border-bottom: 10px solid var(--orange); }
+  .hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 64px; align-items: start; padding-top: 44px; }
+  .brand { display: flex; align-items: center; gap: 14px; margin-bottom: 76px; }
+  .brand img { width: 52px; height: 52px; border-radius: 12px; }
+  .brand b { display: block; font: 700 1.6rem/1 var(--display); }
+  .brand span { display: block; font: 600 1.05rem/1.2 var(--display); color: #ff9a5c; }
+  h1 { margin: 0 0 24px; font: 700 clamp(3.2rem, 8vw, 5.6rem)/.96 var(--display); letter-spacing: -.005em; text-wrap: balance; }
+  .lede { max-width: 31em; font-size: 1.2rem; color: #e4e9ef; }
+  .status { margin: 28px 0 72px; font-weight: 600; color: var(--paint); }
+  .hero .phone { margin-bottom: -210px; border-color: #0f1b2a; }
+
+  /* The centre line runs down the drive; each feature sits off to one side of it */
+  .drive { position: relative; padding: 96px 0 40px; }
+  .drive::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; border-left: 4px dashed #fff; margin-left: -2px; }
+  .feature { position: relative; display: grid; grid-template-columns: 1fr 1fr; column-gap: 112px; align-items: center; margin-bottom: 88px; }
+  .feature .phone { width: 290px; }
+  .feature:nth-child(odd) .phone { order: 1; justify-self: end; }
+  .feature:nth-child(odd) .copy { order: 2; }
+  .feature:nth-child(even) .copy { order: 1; text-align: right; }
+  .feature:nth-child(even) .phone { order: 2; justify-self: start; }
+  .feature:nth-child(even) .copy p { margin-left: auto; }
+  h2 { margin: 0 0 10px; font: 700 2.5rem/1.02 var(--display); }
+  .copy p { max-width: 24em; color: var(--muted); }
+
+  .also { position: relative; background: var(--rock); padding: 8px 0 88px; }
+  .also .inner { max-width: 40em; margin: 0 auto; padding: 22px 0; background: var(--rock); text-align: center; }
+  .also p { color: var(--muted); }
+
+  .under { background: var(--navy); color: #fff; padding: 68px 0; }
+  .under .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+  .under ul { margin: 0; padding: 0; list-style: none; }
+  .under li { padding: 12px 0; border-top: 1px solid rgba(255,255,255,.2); color: #e4e9ef; }
+  .check h2 { color: var(--paint); }
+  .check p { color: #e4e9ef; }
+
+  footer { background: var(--navy-deep); color: var(--on-navy); padding: 36px 0 44px; font-size: .95rem; }
+  footer .links { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-bottom: 14px; font-weight: 600; color: #fff; }
+
+  @media (max-width: 860px) {
+    .hero .wrap { grid-template-columns: 1fr; gap: 0; padding-top: 28px; }
+    .brand { margin-bottom: 44px; }
+    .status { margin-bottom: 44px; }
+    .hero .phone { width: min(300px, 82%); margin: 0 auto -150px; }
+    .drive { padding-top: 64px; }
+    .drive::before { display: none; }
+    .feature { grid-template-columns: 1fr; row-gap: 26px; margin-bottom: 64px; }
+    .feature .copy, .feature:nth-child(even) .copy, .feature:nth-child(odd) .copy { order: 1; text-align: left; }
+    .feature .phone, .feature:nth-child(odd) .phone, .feature:nth-child(even) .phone { order: 2; justify-self: start; width: min(280px, 82%); }
+    .feature:nth-child(even) .copy p { margin-left: 0; }
+    .also { padding-bottom: 64px; }
+    .also .inner { text-align: left; }
+    .under { padding: 52px 0; }
+    .under .wrap { grid-template-columns: 1fr; gap: 40px; }
+  }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="brand">
+        <img src="icon-512.png" alt="" width="52" height="52">
+        <div><b>FaceMarkup</b><span>Jumbo Drill</span></div>
+      </div>
+      <h1>Work out the face <span style="white-space:nowrap">mark-up</span> before you paint it.</h1>
+      <p class="lede">A pocket tool for underground development jumbo operators. Type the chainage, cut and survey offsets. The app gives you the centre line, backsight and drill line for the face.</p>
+      <p class="status">Android app, coming soon to Google Play.</p>
+    </div>
+    <img class="phone" src="screenshots/01-markup-results.png" width="960" height="1706" alt="Results screen showing a drawn face with the centre line 0.35 metres left, wall marks of 3.1 and 2.4 metres, and the step to mark the drill line.">
+  </div>
+</header>
+
+<main>
+  <div class="drive">
+    <div class="wrap">
+      <section class="feature">
+        <img class="phone" src="screenshots/02-rounds-home.png" width="960" height="1706" loading="lazy" alt="Rounds screen with a round in progress, a round waiting for its advance, and averages for the last nine rounds.">
+        <div class="copy">
+          <h2>Rounds</h2>
+          <p>Keep a record of every round: heading, chainage, holes drilled, advance, ground conditions and before and after face photos. A round can wait for its advance until after the fire.</p>
+        </div>
+      </section>
+      <section class="feature">
+        <img class="phone" src="screenshots/06-handover.png" width="960" height="1706" loading="lazy" alt="Handover screen with fields for the rig, where it's at, what's going on with it and what it needs.">
+        <div class="copy">
+          <h2>Handover</h2>
+          <p>Write up where the rig is, what's going on with it and what it needs, then copy the text for the next crew.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+  <section class="also">
+    <div class="wrap">
+      <div class="inner">
+        <h2>Headings and grade</h2>
+        <p>See where each drive was last at, with several headings on the go at once. Work out side wall mark-up off the grade line, and the laser to floor through a change of grade.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="under">
+    <div class="wrap">
+      <div>
+        <h2>Built for underground</h2>
+        <ul>
+          <li>Works fully offline, with no signal, account or sign-in.</li>
+          <li>Big buttons and high contrast, usable with gloves.</li>
+          <li>Light and dark modes.</li>
+          <li>Your data stays on your phone. Save a backup to Documents or send a copy when you want to.</li>
+        </ul>
+      </div>
+      <div class="check">
+        <h2>Check it against the plan</h2>
+        <p>FaceMarkup is a mark-up aid. It does not replace the survey plan or the surveyor's marks. Always check the result against the plan before drilling.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="links">
+      <a href="/facemarkup-privacy/">Privacy policy</a>
+      <a href="mailto:thedrabschy1@gmail.com">thedrabschy1@gmail.com</a>
+    </div>
+    <p>Made by a jumbo operator for jumbo operators. FaceMarkup: Jumbo Drill is an independent app and is not affiliated with any mining company, rig manufacturer or explosives supplier.</p>
+  </div>
+</footer>
+</body>
+</html>
